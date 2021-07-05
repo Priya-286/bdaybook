@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Birthday Gift </title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+<style>
+
+
+body{
+    background-color:#ddd;
+}
+
+#notebook{
+    position:fixed;
+    top:15%; left:15%;
+    width:70%; height:70%;
+    perspective:125vw;
+    transition:transform 1s;
+    box-shadow:0px 0 7px black;
+}
+
+.page{
+    position:absolute;
+    width:100%; height:100%;
+    background-color:#f5f5f5;
+    left:-1px; top:0;
+    transition:transform 1s, color 1s;
+    transform-origin:0 50%;
+    border-left:1px solid #999;
+    user-select:none;
+    
+}
+
+.page p{
+    font-size:2.5vmin;
+    margin:5%;
+    letter-spacing:1px;
+    word-spacing:2px;
+}
+
+.movieTitle{
+    font-size:3.25vmin !important;
+    font-family:fantasy;
+}
+
+.movieImage{
+    width:inherit;
+	height:80%;
+    position:relative;
+    margin:auto;
+    float:right;
+}
+
+#cover{
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:linear-gradient(215deg, #242424 , #222222);
+    transform-origin:0 50%;
+    transition:transform 1s;
+    z-index:11;
+}
+
+#firstPage{   
+    text-align:center;
+	    font-size: 60px;
+    text-shadow: 1px 1px 1px black, 2px 2px 1px black, 3px 3px 1px #dad418, 4px 4px 1px #ce3434;
+}
+
+#br{
+    position:absolute;
+    right:15%; top:0;
+    width:15%; height:100%;
+    background-color:#432;
+}
+
+#a{
+    z-index:10;
+}
+#b{
+    z-index:9;
+}
+#c{
+    z-index:8;
+}
+#d{
+    z-index:7;
+}
+#e{
+    z-index:6;
+}
+#f{
+    z-index:5;
+}
+#g{
+    z-index:4;
+}
+#h{
+    z-index:3;
+}
+#i{
+    z-index:2;
+}
+#j{
+    z-index:1;
+}
+#backCover{
+    background:linear-gradient(135deg, #353535, #252525);
+    z-index:0;
+}
+
+.fa-arrow-circle-right{
+    position:absolute;
+    bottom:5%; right:5%;
+    font-size:150%;
+    transition:transform 0.3s;
+    text-shadow:0 0 1px white;
+}
+
+.fa-arrow-circle-left{
+    position:absolute;
+    left:5%; bottom:5%;
+    font-size:150%;
+    transition:transform 0.3s;
+    text-shadow:0 0 1px white;
+}
+
+.fa-arrow-circle-left:hover, .fa-arrow-circle-right:hover{
+    transform:scale(1.3);
+}
+
+#secretPaper{
+    position:absolute;
+    width:45%; height:45%;
+    background-color:#eee;
+    left:27.5%; top:33%;
+    transform:rotate(15deg);
+    transition:transform 1s, top 1s;
+    text-align:center;
+    z-index:-1;
+}
+
+#hideout{
+    position:absolute;
+    width:100%;
+    height:calc(60% - 1vmin); top:40%;
+    border-top:1vmin solid black;
+    background-color:#222222;
+}
+
+#secretPaper q{
+    font-size:2.75vmin;
+    text-align:center;
+    letter-spacing:1px;
+    word-spacing:2px;
+    font-family:cursive;
+}
+
+</style>
+<script>
+
+
+const $ = (element) => document.getElementById(element);
+
+const change = (element,index, transform, color) => {
+    $(element).style.transform = transform;
+    $(element).style.color = color;
+    setTimeout(function(){
+        $(element).style.zIndex=index;
+    },500);
+}
+
+
+const paperPosition = (pY,zI) => {
+    $("secretPaper").style.top = pY;
+    $("secretPaper").style.zIndex = zI;
+}
+
+const takePaper = (top, transform, dsp) => {
+    $("secretPaper").style.top = top;
+    $("secretPaper").style.transform  = transform;
+    $("lastArrow").style.display = dsp;
+}
+
+const secretPage = () => {
+    if($("secretPaper").style.zIndex != "2"){
+        takePaper("-100vh", "rotate(0deg)", "none");
+        setTimeout(function(){
+            paperPosition("30%", "2");
+        },1500);
+    }
+    else{
+        takePaper("-100%", "rotate(10deg)", "block");
+        setTimeout(function(){
+            paperPosition("30%", "-1");
+        },1500);
+    }
+}
+
+//An older function
+const waterMark = (wh, left, top,fontSize) => {
+    var mark = document.createElement("div");
+    var link = document.createElement("a");
+    $("firstPage").appendChild(link);
+    link.href="#";
+    link.appendChild(mark);
+    mark.style=`
+        position:absolute;
+        left:${left};
+        top:${top};
+        width:${wh};
+        height:${wh};
+        border-radius:50%;
+        background:url(${"r1.jpg"} );
+        background-size:cover;
+        background-position:center;
+        text-align:center;
+        line-height:${wh};
+        color:white;
+        font-size:${fontSize};
+        opacity:1;
+        box-shadow:0 0 1px black;
+        transform:translate(-50%, -50%)
+        `;
+    mark.innerText = "";
+}
+
+window.onload = function(){
+    waterMark("25vmin", "50%", "50%", "3.5vmin");
+};
+
+</script>
+   </head>
+    <body>
+        
+        <div id ="notebook">
+            <div id = "cover" onclick ="change('cover',11, 'rotateY(-90deg)', 'transparent')">
+                <i onclick ="change('cover',11, 'rotateY(-90deg)', 'transparent')" class="fa fa-arrow-circle-right"></i>
+                <div id = "br"></div>
+            </div>
+            <div class = "page" id ="a">
+                <p id = "firstPage">Happy Birthday dear motivational speaker</p>
+                <!--blank-->
+                <i class="fa fa-arrow-circle-left" onclick = "change('cover',11, 'rotateY(0deg)', 'black')"></i>
+                <i class="fa fa-arrow-circle-right" onclick = "change('a',12, 'rotateY(-90deg)', 'transparent')"></i>
+            </div>
+            <div class = "page" id = "b">
+                <img src = "r2.jpg" class = "movieImage">
+                <br>
+                <p class = 'movieTitle'>Motivation ka khajana</p>
+                                <i class="fa fa-arrow-circle-left" onclick = "change('a',10, 'rotateY(0deg)', 'black')"></i>
+                <i class="fa fa-arrow-circle-right" onclick = "change('b',13, 'rotateY(-90deg)', 'transparent')"></i>
+            </div>
+            <div class = "page" id = "c">
+                <img src = "r3.jpg" class = "movieImage">
+                <br>
+                <p class = "movieTitle">KIND HEARTED PERSON</p>
+                               <i class="fa fa-arrow-circle-left" onclick = "change('b', 9, 'rotateY(0deg)', 'black')"></i>
+                <i class="fa fa-arrow-circle-right" onclick = "change('c',14, 'rotateY(-90deg)', 'transparent')"></i>
+            </div>
+            <div class = "page" id = "d">
+                <img src = "r4.jpg" class = "movieImage">
+                <br>
+                <p class = "movieTitle">Trainer , success coach</p>
+                                <i class="fa fa-arrow-circle-left" onclick = "change('c', 8, 'rotateY(0deg)', 'black')"></i>
+                <i class="fa fa-arrow-circle-right" onclick = "change('d',15, 'rotateY(-90deg)', 'transparent')"></i>
+            </div>
+            <div class = "page" id = "e">
+                <img src = "r5.jpg" class = "movieImage">
+                <br>
+                <p class = "movieTitle">The most caring one</p>
+                               <i class="fa fa-arrow-circle-left" onclick = "change('d',7, 'rotateY(0deg)', 'black')"></i>
+                <i class="fa fa-arrow-circle-right" onclick = "change('e',16, 'rotateY(-90deg)', 'transparent')"></i>
+            </div>
+            <div class = "page" id = "f">
+                <img src = "pp (1).jpg" class = "movieImage">
+                <br>
+                <p class = "movieTitle">Inspiration  overloaded</p>
+                               <i class="fa fa-arrow-circle-left" onclick ="change('e',6, 'rotateY(0deg)', 'black')"></i>
+                <i class="fa fa-arrow-circle-right" onclick = "change('f',17, 'rotateY(-90deg)', 'transparent')"></i>
+            </div>
+            <div class = "page" id = "g">
+                <img src = "r6.jpg" class = "movieImage">
+                <br>
+                <p class = "movieTitle">SHARING CARING LOVING MAN</p>
+                                <i class="fa fa-arrow-circle-left" onclick = "change('f',5, 'rotateY(0deg)', 'black')"></i>
+                <i class="fa fa-arrow-circle-right" onclick = "change('g',18, 'rotateY(-90deg)', 'transparent')"></i>
+            </div>
+            <div class = "page" id = "h">
+                <img src = "r2.jpg" class = "movieImage">
+                <br>
+                <p class = "movieTitle">ALWAYS KEEP SMILE ON FACE</p>
+                               <i class="fa fa-arrow-circle-left" onclick = "change('g',4, 'rotateY(0deg)', 'black')"></i>
+                <i class="fa fa-arrow-circle-right" onclick = "change('h',19, 'rotateY(-90deg)', 'transparent')"></i>
+            </div>
+           <div class = "page" id = "i">
+                <img src = "r5.jpg" class = "movieImage">
+                <br>
+                <p class = "movieTitle">All rounder perfect</p>
+                               <i class="fa fa-arrow-circle-left" onclick = "change('h',3, 'rotateY(0deg)', 'black')"></i>
+                <i class="fa fa-arrow-circle-right" onclick = "change('i',20, 'rotateY(-90deg)', 'transparent')"></i>
+            </div>
+            <div class = "page" id = "j">
+                <img src = "r6.jpg" class = "movieImage">
+                <br>
+                <p class = "movieTitle">SOC ki chinki, Jaan hamari team ki</p>
+                               <i class="fa fa-arrow-circle-left" onclick = "change('i',2, 'rotateY(0deg)', 'black')"></i>
+                <i class="fa fa-arrow-circle-right" onclick = "change('j',21, 'rotateY(-90deg)', 'transparent')"></i>
+            </div>
+            <div class = "page" id = "backCover">
+                <div id = "secretPaper" onclick = "secretPage()">
+                    <q>"Have a shaandar, healthy and wealthy bday DAD, Keep inspiring and Loving."</q>
+                </div>
+                <div id = "hideout"></div>
+                <i class="fa fa-arrow-circle-left" onclick = "change('j',1, 'rotateY(0deg)', 'black')" id ="lastArrow"></i>
+				
+            </div>
+        </div>
+		
+    </body>
+</html>
